@@ -9,13 +9,9 @@ module Markerb
       @erb_handler ||= ActionView::Template.registered_template_handler(:erb)
     end
 
-    def call(template)
-      compiled_source = erb_handler.call(template)
-      if template.formats.include?(:html)
-        "Markerb::Markdown.to_html(begin;#{compiled_source};end).html_safe"
-      else
-        compiled_source
-      end
+    def call(template, src)
+      compiled_source = erb_handler.call(template, src)
+      "Markerb::Markdown.to_html(begin;#{compiled_source};end).html_safe"
     end
   end
 end

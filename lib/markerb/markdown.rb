@@ -6,7 +6,7 @@ module Markerb
     def self.to_html(compiled_source)
       if defined?(Redcarpet)
         Markerb.renderer ||= Redcarpet::Render::HTML
-        Redcarpet::Markdown.new(Markerb.renderer, Markerb.processing_options).render(compiled_source)
+        Redcarpet::Markdown.new(Markerb.renderer, Markerb.processing_options).render(compiled_source.to_s)
       elsif defined?(Kramdown)
         Kramdown::Document.new(compiled_source, Markerb.processing_options).to_html
       else
